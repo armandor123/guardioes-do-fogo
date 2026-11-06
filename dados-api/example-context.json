@@ -1,0 +1,54 @@
+{
+  "query": {
+    "latitude": -22.9,
+    "longitude": -47.06,
+    "radius_km": 10.0,
+    "days": 1
+  },
+  "weather": {
+    "schema_version": "1.0",
+    "source": "DEMO meteorologia",
+    "simulated": true,
+    "status": "ok",
+    "observed_at": "2026-01-01T12:00:00Z",
+    "fetched_at": "2026-11-05T23:59:13.605486Z",
+    "data": {
+      "temperature_c": 32.0,
+      "humidity_pct": 25.0,
+      "wind_kmh": 18.0,
+      "wind_direction_deg": 90.0,
+      "precipitation_mm": 0.0
+    },
+    "warnings": [
+      "Cenário fixo fictício para demonstração; não indica condições atuais."
+    ]
+  },
+  "hotspots": {
+    "schema_version": "1.0",
+    "source": "DEMO satélite",
+    "simulated": true,
+    "status": "ok",
+    "observed_at": "2026-01-01T12:00:00Z",
+    "fetched_at": "2026-11-05T23:59:13.605486Z",
+    "data": [
+      {
+        "id": "demo-1",
+        "latitude": -22.9,
+        "longitude": -47.06,
+        "observed_at": "2026-01-01T12:00:00Z",
+        "confidence": "nominal",
+        "frp_mw": 8.0,
+        "distance_km": 0.0
+      }
+    ],
+    "warnings": [
+      "Cenário fixo fictício para demonstração; não indica condições atuais."
+    ]
+  },
+  "risk": {
+    "level": null,
+    "method": null,
+    "validated": false,
+    "reason": "Índice de risco ainda não implementado; requer método validado. Não inferir risco pela contagem de focos."
+  }
+}

@@ -1,0 +1,24 @@
+# Banco exclusivo para testes; não usa volumes ou credenciais do desenvolvimento.
+services:
+  test-db:
+    image: postgis/postgis:16-3.7
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: local-test-only
+      POSTGRES_DB: guardioes_test
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user -d guardioes_test"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    environment:
+      TEST_DATABASE_URL: postgresql://test_user:local-test-only@test-db:5432/guardioes_test
+    depends_on:
+      test-db:
+        condition: service_healthy

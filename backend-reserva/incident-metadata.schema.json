@@ -1,0 +1,69 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "client_request_id": {
+      "format": "uuid",
+      "title": "Client Request Id",
+      "type": "string"
+    },
+    "property_id": {
+      "title": "Property Id",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "maxLength": 2000,
+      "title": "Description",
+      "type": "string"
+    },
+    "latitude": {
+      "anyOf": [
+        {
+          "maximum": 90,
+          "minimum": -90,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Latitude"
+    },
+    "longitude": {
+      "anyOf": [
+        {
+          "maximum": 180,
+          "minimum": -180,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Longitude"
+    },
+    "location_source": {
+      "default": "unavailable",
+      "enum": [
+        "gps",
+        "manual",
+        "unavailable"
+      ],
+      "title": "Location Source",
+      "type": "string"
+    },
+    "location_authorized": {
+      "default": false,
+      "title": "Location Authorized",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "client_request_id",
+    "property_id"
+  ],
+  "title": "Incident",
+  "type": "object"
+}

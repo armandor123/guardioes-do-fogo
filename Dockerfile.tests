@@ -1,0 +1,7 @@
+FROM python:3.12-slim
+WORKDIR /suite
+COPY backend-reserva/requirements.txt /tmp/backend.txt
+COPY dados-api/requirements.txt /tmp/dados.txt
+RUN pip install --no-cache-dir -r /tmp/backend.txt -r /tmp/dados.txt
+COPY . .
+CMD ["python", "-m", "pytest", "-q", "dados-api/tests", "backend-reserva/tests", "tests_integration.py"]

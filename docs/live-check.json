@@ -1,0 +1,44 @@
+{
+  "query": {
+    "latitude": -22.9,
+    "longitude": -47.06,
+    "radius_km": 10.0,
+    "days": 1
+  },
+  "weather": {
+    "schema_version": "1.0",
+    "source": "Open-Meteo",
+    "simulated": false,
+    "status": "ok",
+    "observed_at": "2026-11-05T23:45:00Z",
+    "fetched_at": "2026-11-05T23:59:19.593628Z",
+    "data": {
+      "temperature_c": 21.7,
+      "humidity_pct": 90.0,
+      "wind_kmh": 9.6,
+      "wind_direction_deg": 12.0,
+      "precipitation_mm": 0.0
+    },
+    "warnings": [
+      "Dados de modelo meteorológico; não são medição em sua propriedade."
+    ]
+  },
+  "hotspots": {
+    "schema_version": "1.0",
+    "source": "NASA FIRMS / VIIRS_SNPP_NRT",
+    "simulated": false,
+    "status": "unavailable",
+    "observed_at": null,
+    "fetched_at": "2026-11-05T23:59:13.808693Z",
+    "data": null,
+    "warnings": [
+      "FIRMS_MAP_KEY não configurada."
+    ]
+  },
+  "risk": {
+    "level": null,
+    "method": null,
+    "validated": false,
+    "reason": "Índice de risco ainda não implementado; requer método validado. Não inferir risco pela contagem de focos."
+  }
+}

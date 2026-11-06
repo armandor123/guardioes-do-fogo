@@ -1,0 +1,49 @@
+services:
+  db:
+    image: postgis/postgis:16-3.7
+    environment:
+      POSTGRES_USER: guardioes
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no .env}
+      POSTGRES_DB: guardioes
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U guardioes -d guardioes"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+  migrate:
+    build: ./backend-reserva
+    command: ["python", "-m", "backend.migrate"]
+    environment:
+      DATABASE_URL: postgresql://guardioes:${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD}@db:5432/guardioes
+    depends_on:
+      db:
+        condition: service_healthy
+  dados:
+    build: ./dados-api
+    environment:
+      DATA_API_KEY: ${DATA_API_KEY:?Defina DATA_API_KEY no .env}
+      DATA_MODE: ${DATA_MODE:-demo}
+      FIRMS_MAP_KEY: ${FIRMS_MAP_KEY:-}
+    ports:
+      - "127.0.0.1:8001:8001"
+  backend:
+    build: ./backend-reserva
+    environment:
+      DATA_API_KEY: ${DATA_API_KEY:?Defina DATA_API_KEY no .env}
+      DATA_API_URL: http://dados:8001
+      DATABASE_URL: postgresql://guardioes:${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD}@db:5432/guardioes
+      PHOTO_DIR: /app/data/photos
+    volumes:
+      - private_photos:/app/data/photos
+    ports:
+      - "${BACKEND_BIND:-127.0.0.1}:8000:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      dados:
+        condition: service_started
+volumes:
+  postgres_data:
+  private_photos:
